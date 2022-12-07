@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "College Picker", "College Picker.pyproj", "{949DCA86-8640-482D-BB4C-E1CB1FEE1B46}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{949DCA86-8640-482D-BB4C-E1CB1FEE1B46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{949DCA86-8640-482D-BB4C-E1CB1FEE1B46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {47BA3302-FBDA-4A32-BE57-22F81CE5222C}
+	EndGlobalSection
+EndGlobal

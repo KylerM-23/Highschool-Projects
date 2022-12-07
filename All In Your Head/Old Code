@@ -1,0 +1,151 @@
+ def PickOpeningDuo(self):
+        
+        self.Player1 = ''
+        self.Player2 = ''
+        
+        if len(self.PlayerParty) <=2:
+            if len(self.PlayerParty) == 1:
+                self.Player1 = self.PlayerParty[0]
+                self.Player1.SetBattlePos('Player1')
+                return
+
+            else:
+                self.Player1 = self.PlayerParty[0]
+                self.Player1.SetBattlePos('Player1')
+                self.Player2 = self.PlayerParty[1]
+                self.Player2.SetBattlePos('Player2')
+                return
+
+        elif len(self.PlayerParty)>2:
+            Background = Button(self.win, "OtherBackground", self.userfile, 640,360)
+            Background.draw()
+
+            Message = Button(self.win, "Message", "FighterIcon/Message.png", 640, 20)
+            Message.draw()
+            
+            ppos = 0
+            xpos = 220
+            ypos = 200
+
+            self.Card1 = []
+
+            self.Card2 = []
+
+            if len(self.PlayerParty) <=6:
+                for i in range (len(self.PlayerParty)):
+                    if ppos == 3:
+                        xpos = 220
+                        ypos = 550
+                    
+                    x = self.PlayerParty[ppos] 
+
+                    self.Card1.append(Button(self.win, x , x.getFighterPicture(), xpos, ypos))
+
+                    xpos = xpos + 320+60
+
+                    ppos = ppos + 1
+
+                for i in self.Card1:
+                    i.draw()
+
+                while(True):
+                    click = self.win.getMouse()
+                    xpoint = click.getX()
+                    ypoint = click.getY()
+                    
+                    for i in self.Card1:
+                        if (i.getX()-160)<=click.getX()<=(i.getX()+160):
+                            if (i.getY()-160)<=click.getY()<=(i.getY()+160):
+                                if self.Player1 == '':
+                                    self.Player1 = i
+                                    self.Player1.SetBattlePos('Player1')
+
+                                else:
+                                    self.Player2 = i
+                                    self.Player2.SetBattlePos('Player2')
+                                    return
+
+            
+            elif len(self.PlayerParty) >6:
+                for i in range(5):
+                    if ppos == 3:
+                        xpos = 220
+                        ypos = 550
+                    
+                    x = self.PlayerParty[ppos] 
+
+                    self.Card1.append(Button(self.win, x, x.getFighterPicture(), xpos, ypos))
+
+                    xpos = xpos + 320+60
+
+                    ppos = ppos + 1
+                
+                self.Card1.append(Button(self.win, "Next", "FighterIcon/Next.png", xpos, ypos))
+
+                for i in range(len(self.PlayerParty[ppos:])):
+                    xpos = 220
+                    ypos = 200
+                    
+                    if ppos == 9:
+                        xpos = 220
+                        ypos = 550
+                    
+                    x = self.PlayerParty[ppos] 
+
+                    self.Card2.append(Button(self.win, x, x.getFighterPicture(), xpos, ypos))
+
+                    xpos = xpos + 320+60
+
+                    ppos = ppos + 1
+                
+                self.Card2.append(Button(self.win, "Next", "FighterIcon/Next.png", xpos, ypos))
+                
+                self.Page = 1
+
+                self.DrawPage(self.Card1)
+
+                CardList = self.Card1
+
+                while(True):
+                    click = self.win.getMouse()
+                    xpoint = click.getX()
+                    ypoint = click.getY()
+                    
+                    for i in CardList:
+                        if (i.getX()-160)<=click.getX()<=(i.getX()+160):
+                            if (i.getY()-160)<=click.getY()<=(i.getY()+160):
+                                if i.getName() == 'Next':
+                                    if self.Page == 1:
+                                        self.UndrawPage(self.Card1)
+                                        self.DrawPage(self.Card2)
+                                        self.Page = 2
+                                        CardList = self.Card2
+                                    
+                                    elif self.Page == 2:
+                                        self.UndrawPage(self.Card2)
+                                        self.DrawPage(self.Card1)
+                                        self.Page = 1
+                                        CardList = self.Card1
+                                elif i.getName() == 'X':
+                                    pass
+                                elif self.Player1 != '':
+                                    self.Player2 = i.getName()
+                                    self.Player2.SetBattlePos('Player2')
+                                    return
+
+                                elif self.Player1 == '':
+                                    self.Player1 = i.getName()
+                                    self.Player1.SetBattlePos('Player1')
+                                    
+                                    if  self.Page  == 1:
+                                        self.Card1.remove(i)
+                                        Temporary = Button(self.win, "X", "FighterIcon/X.png", i.getX(), i.getY())
+                                        Temporary.draw()
+                                        self.Card1.append(Temporary)
+                                    
+                                    elif  self.Page  == 2:
+                                        self.Card2.remove(i)
+                                        Temporary = Button(self.win, "X", "FighterIcon/X.png", i.getX(), i.getY())
+                                        Temporary.draw()
+                                        self.Card2.append(Temporary)
+
